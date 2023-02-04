@@ -1,0 +1,61 @@
+---
+# podman_bind9_resolver/tasks/main.yml
+
+- name: 'Manage podman SELinux Booleans'
+  ansible.posix.seboolean:
+    name: 'container_connect_any'
+    state: true
+    persistent: true
+
+- name: 'Create directory /opt/Bind9_Podman'
+  ansible.builtin.file:
+    path: '/opt/Bind9_Podman'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+
+- name: 'Create file /opt/Bind9_Podman/named.conf.options'
+  ansible.builtin.template:
+    src: 'named.conf.options.j2'
+    dest: '/opt/Bind9_Podman/named.conf.options'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify:
+    - 'Restart the container-bind9-resolver service'
+
+- name: 'Create rootful bind9-resolver container'
+  containers.podman.podman_container:
+    name: 'bind9-resolver'
+    image: 'docker.io/internetsystemsconsortium/bind9:9.18'
+    state: 'stopped'
+    publish:
+      - '53:53/tcp'
+      - '53:53/udp'
+    volume:
+      - '/opt/Bind9_Podman/named.conf.options:/etc/bind/named.conf.options:ro'
+    labels:
+      PODMAN_SYSTEMD_UNIT: container-bind9-resolver
+      io.containers.autoupdate: registry
+    generate_systemd:
+      path: '/etc/systemd/system'
+      new: true
+
+- name: 'Start the container-bind9-resolver.service service'
+  ansible.builtin.service:
+    name: 'container-bind9-resolver.service'
+    state: started
+    daemon_reload: true
+
+- name: 'Enable the container-bind9-resolver.service service'
+  ansible.builtin.service:
+    name: 'container-bind9-resolver.service'
+    enabled: true
+
+- name: 'Enable the podman-auto-update.timer'
+  ansible.builtin.service:
+    name: 'podman-auto-update.timer'
+    enabled: true
+  when:
+    - enable_podman_auto_updates_timer | bool
