@@ -25,11 +25,11 @@
   notify:
     - 'Restart the container-bind9-resolver service'
 
-- name: 'Create rootful bind9-resolver container'
+- name: 'Create and start rootful bind9-resolver container'
   containers.podman.podman_container:
     name: 'bind9-resolver'
     image: 'docker.io/internetsystemsconsortium/bind9:9.18'
-    state: 'stopped'
+    state: 'started'
     publish:
       - '53:53/tcp'
       - '53:53/udp'
