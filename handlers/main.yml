@@ -1,0 +1,7 @@
+---
+# podman_bind9_resolver/handlers/main.yml
+
+- name: 'Restart the container-bind9-resolver service'
+  ansible.builtin.service:
+    name: 'container-bind9-resolver.service'
+    state: 'restarted'
