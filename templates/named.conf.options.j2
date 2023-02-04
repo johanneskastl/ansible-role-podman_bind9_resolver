@@ -1,0 +1,25 @@
+//
+// {{ ansible_managed }}
+//
+
+options {
+        directory "/var/cache/bind";
+
+        forwarders {
+{% for forwarder in podman_bind9_resolver_forwarders %}
+                {{ forwarder }};
+{% endfor %}
+        };
+
+        allow-query { {{ podman_bind9_resolver_allow_query | default('any') }}; };
+        allow-query-cache { {{ podman_bind9_resolver_allow_query_cache | default('any') }}; };
+        allow-recursion { {{ podman_bind9_resolver_allow_recursion | default('any') }}; };
+
+        dnssec-validation {{ podman_bind9_resolver_dnssec_validation | default('auto') }};
+
+{% if podman_bind9_resolver_ipv6_enabled | bool %}
+        listen-on-v6 { any; };
+{% else %}
+        listen-on-v6 { none; };
+{% endif %}
+};
