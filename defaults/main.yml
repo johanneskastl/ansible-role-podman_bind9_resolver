@@ -4,3 +4,7 @@
 ## role behaviour
 
 enable_podman_auto_updates_timer: false
+
+## bind configuration options
+
+podman_bind9_resolver_ipv6_enabled: true
