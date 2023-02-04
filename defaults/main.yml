@@ -1,4 +1,6 @@
 ---
 # podman_bind9_resolver/defaults/main.yml
 
+## role behaviour
+
 enable_podman_auto_updates_timer: false
