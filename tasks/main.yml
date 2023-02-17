@@ -28,7 +28,7 @@
 - name: 'Create and start rootful bind9-resolver container'
   containers.podman.podman_container:
     name: 'bind9-resolver'
-    image: 'docker.io/internetsystemsconsortium/bind9:9.18'
+    image: "{{ bind9_container_image }}"
     state: 'started'
     publish:
       - '53:53/tcp'
