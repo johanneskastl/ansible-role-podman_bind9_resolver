@@ -26,6 +26,10 @@ Role Variables
 - `podman_bind9_resolver_dnssec_validation`: Value that should be set for the bind configuration option `dnssec-validation`. Defaults to `auto` (the trailing semicolon is added automatically)
 - `podman_bind9_resolver_ipv6_enabled`: (Boolean) The configuration option `listen-on-v6` will be set to `any`, if this variable is set to `true`, or `none` if this variable is set to `false`. Default value is `true`.
 
+**Container image**
+
+- `bind9_container_image`: full name of the container image including the tag (default: `docker.io/internetsystemsconsortium/bind9:9.18`)
+
 Dependencies
 ------------
 
