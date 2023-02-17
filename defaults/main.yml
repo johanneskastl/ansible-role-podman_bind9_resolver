@@ -1,6 +1,10 @@
 ---
 # podman_bind9_resolver/defaults/main.yml
 
+## container image
+
+bind9_container_image: 'docker.io/internetsystemsconsortium/bind9:9.18'
+
 ## role behaviour
 
 enable_podman_auto_updates_timer: false
