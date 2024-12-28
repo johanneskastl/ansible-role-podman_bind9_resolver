@@ -15,10 +15,10 @@
     group: 'root'
     mode: '0755'
 
-- name: 'Create file /opt/Bind9_Podman/named.conf.options'
+- name: 'Create file /opt/Bind9_Podman/named.conf'
   ansible.builtin.template:
-    src: 'named.conf.options.j2'
-    dest: '/opt/Bind9_Podman/named.conf.options'
+    src: 'named.conf.j2'
+    dest: '/opt/Bind9_Podman/named.conf'
     owner: 'root'
     group: 'root'
     mode: '0644'
@@ -36,7 +36,7 @@
       - '53:53/tcp'
       - '53:53/udp'
     volume:
-      - '/opt/Bind9_Podman/named.conf.options:/etc/bind/named.conf.options:ro'
+      - '/opt/Bind9_Podman/named.conf:/etc/bind/named.conf:ro'
     labels:
       PODMAN_SYSTEMD_UNIT: container-bind9-resolver
       io.containers.autoupdate: registry
