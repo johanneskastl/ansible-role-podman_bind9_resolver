@@ -29,6 +29,8 @@
   containers.podman.podman_container:
     name: 'bind9-resolver'
     image: "{{ bind9_container_image }}"
+    cmd_args:
+      - '-L /dev/stdout'
     state: 'started'
     publish:
       - '53:53/tcp'
