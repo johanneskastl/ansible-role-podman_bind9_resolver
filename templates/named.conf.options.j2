@@ -21,6 +21,14 @@ options {
         listen-on-v6 { any; };
 {% else %}
         listen-on-v6 { none; };
-        filter-aaaa-on-v4 yes;
+        plugin query "filter-aaaa.so" {
+                filter-aaaa-on-v4 yes;
+                filter-aaaa-on-v6 yes;
+        };
 {% endif %}
 };
+{% if podman_bind9_resolver_filter_aaaa_on_ipv4 | bool %}
+plugin query "filter-aaaa.so" {
+        filter-aaaa-on-v4 yes;
+};
+{% endif %}
