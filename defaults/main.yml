@@ -3,7 +3,7 @@
 
 ## container image
 
-bind9_container_image: 'docker.io/internetsystemsconsortium/bind9:9.18'
+bind9_container_image: 'docker.io/internetsystemsconsortium/bind9:9.20'
 
 ## role behaviour
 
