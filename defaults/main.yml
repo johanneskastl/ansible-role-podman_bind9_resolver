@@ -12,3 +12,4 @@ enable_podman_auto_updates_timer: false
 ## bind configuration options
 
 podman_bind9_resolver_ipv6_enabled: true
+podman_bind9_resolver_filter_aaaa_on_ipv4: false
