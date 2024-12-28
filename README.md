@@ -25,6 +25,8 @@ Role Variables
 - `podman_bind9_resolver_allow_recursion`: Value that should be set for the bind configuration option `allow-recursion`. Defaults to `any` (the trailing semicolon is added automatically)
 - `podman_bind9_resolver_dnssec_validation`: Value that should be set for the bind configuration option `dnssec-validation`. Defaults to `auto` (the trailing semicolon is added automatically)
 - `podman_bind9_resolver_ipv6_enabled`: (Boolean) The configuration option `listen-on-v6` will be set to `any`, if this variable is set to `true`, or `none` if this variable is set to `false`. Default value is `true`.
+- `podman_bind9_resolver_filter_aaaa_on_ipv4`: (Boolean) If set to `true`, AAAA
+  responses will be filtered on all IPv4 interfaces (see [the manpage for filter-aaaa](https://manpages.debian.org/unstable/bind9/filter-aaaa.8.en.html)).
 
 **Container image**
 
